@@ -1,10 +1,23 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-  # TODO: 🙄
-  type Query {
-    helloWorld: String
+  input User {
+    _id: ID
+    name: String
+    email: String!
+    password: String!
+    movies: [Movie]
   }
-
-  # TODO: Add mutation(s) that return(s) a JWT.
+  type Movie {
+    _id: ID!
+    rating: Int 
+    tags: [String]
+  }
+  type Query {
+    movies: [Movie]!
+  }
+  type Mutation {
+    createUser(newUser: User): User
+    updateMovie(movieID: ID!, tags: [String], rating: Int): Movie
+  }
 `;
