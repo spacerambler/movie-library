@@ -1,4 +1,3 @@
-// TODO: Import the models
 import client from "./client.js";
 import User from "../models/User.js";
 import Movie from "../models/Movie.js";
@@ -45,4 +44,4 @@ client
   });
 
 
-  
+  })
