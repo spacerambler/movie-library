@@ -1,5 +1,7 @@
 const {Schema, model} = require('mongoose');
 import Movie from "./Movie.js"
+import { default as mongoose } from "mongoose";
+
 
 const userSchema= new Schema({
     name: {
@@ -20,8 +22,5 @@ const userSchema= new Schema({
 
 })
 
-// _id: ID
-// name: String
-// email: String!
-// password: String!
-// movies: [Movie]
+export default mongoose.model("User", userSchema);
+

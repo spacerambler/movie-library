@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 import { default as mongoose } from "mongoose";
-export default mongoose.model( "Moive",
+export default mongoose.model( "Movie",
  new Schema({
     _id: {
         type: Number,
