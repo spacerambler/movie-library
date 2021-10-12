@@ -1,11 +1,6 @@
-const {Schema, model} = require('mongoose');
-import { default as mongoose } from "mongoose";
+import mongoose from "mongoose";
 export default mongoose.model( "Movie",
- new Schema({
-    _id: {
-        type: Number,
-        unique: true
-      },
+ new mongoose.Schema({
       rating: {
         type: Number,
     },

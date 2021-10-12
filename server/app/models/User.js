@@ -1,9 +1,8 @@
-const {Schema, model} = require('mongoose');
 import Movie from "./Movie.js"
-import { default as mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 
-const userSchema= new Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         unique: true

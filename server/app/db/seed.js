@@ -4,17 +4,23 @@ import Movie from "../models/Movie.js";
 
 client
   .connect()
+  .then(() => {
+    Promise.all([
+      Movie.deleteMany({}),
+      User.deleteMany({}),
+    ]);
+  })
   .then(() => { 
     Movie.insertMany([
       {
-        _id: 123,
         rating: 5,
-        tags: ["Horror", "Action"]
+        tags: ["Horror", "Action"],
+        tmdbId: ""
       },
       {
-        _id: 12,
         rating: 5,
-        tags: ["Comedy", "Action"]
+        tags: ["Comedy", "Action"],
+        tmdbId: ""
       }
     ])
     .then((film) => 
