@@ -1,14 +1,13 @@
 const { AuthenticationError } = require('apollo-server-express');
-import { User, Movies } from ('../models');
+import { User, Movie } from '../models';
 const { signToken } = require('../utils/auth');
 
 export default {
   Query: {
-    movies: async () => {
-      return await Movie.find({});
-    },
+    movies: () => Movie.find({})
+       
   },
-
+  
   Mutation: {
     newUser: async (parent, { name, email, password }) => {
       const user = await User.create({ name, email, password });
@@ -27,7 +26,7 @@ export default {
       const token = signToken(user);
       return { token, user };
     },
-    movieID: async ()
+    // movieID: async ()
   }
   // TODO: Write mutations that use `context` with JWT.
-};
+}
