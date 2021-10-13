@@ -9,7 +9,7 @@ export default {
   },
   jwt: {
     expirationTime: process.env.JWT_EXPIRATION || "1d",
-    secret: process.env.JWT_SECRET,
+    secret: process.env.JWT_SECRET|| "mysecret",
   },
   saltRounds: 10,
 };
