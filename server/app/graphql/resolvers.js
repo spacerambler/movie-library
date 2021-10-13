@@ -1,17 +1,19 @@
-const { AuthenticationError } = require('apollo-server-express');
-import { User, Movie } from '../models';
-const { signToken } = require('../utils/auth');
+import AuthenticationError from "apollo-server-express";
+import { User, Movie } from '../models/index.js';
+import tokenService from "../utils/auth.js";
 
 export default {
   Query: {
-    movies: () => Movie.find({})
+    movies: (_,__, context) => { 
+      console.log(context.user)
+      return Movie.find({}).exec()}
        
   },
   
   Mutation: {
-    newUser: async (parent, { name, email, password }) => {
+    addUser: async (parent, { name, email, password }) => {
       const user = await User.create({ name, email, password });
-      const token = signToken(user);
+      const token = tokenService.generateToken(user);
       return { token, user };
     },
     login: async (parent, { email, password }) => {
@@ -19,11 +21,11 @@ export default {
       if (!user) {
         throw new AuthenticationError('No user found with this email address');
       }
-      const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await user.validatePassword(password);
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
-      const token = signToken(user);
+      const token = tokenService.generateToken({user});
       return { token, user };
     },
     // movieID: async ()
