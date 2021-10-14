@@ -8,6 +8,9 @@ export default mongoose.model( "Movie",
         type: [String],
         
       },
+      tmdbId:{
+        type: String
+      }
       
 
 }))
