@@ -1,19 +1,19 @@
+/* eslint-disable object-shorthand */
 import AuthenticationError from "apollo-server-express";
 import { User, Movie } from '../models/index.js';
 import tokenService from "../utils/auth.js";
 
 export default {
   Query: {
-    movies: (_,__, context) => { 
-      console.log(context.user)
-      return Movie.find({}).exec()}
-       
+    getUser: (_,__, context) => User.findById(context.user._id).exec()
+    
   },
   
   Mutation: {
     addUser: async (parent, { name, email, password }) => {
       const user = await User.create({ name, email, password });
-      const token = tokenService.generateToken(user);
+
+      const token = tokenService.generateToken({user: user});
       return { token, user };
     },
     login: async (parent, { email, password }) => {
@@ -28,7 +28,9 @@ export default {
       const token = tokenService.generateToken({user});
       return { token, user };
     },
-    // movieID: async ()
-  }
+    updateMovie: async (parent, {movieID, rating, tags}) => Movie.updateOne({movieID: movieID}, {$set: {tags: tags}}, {$set: {rating: rating}}) 
+     
   // TODO: Write mutations that use `context` with JWT.
+
+}
 }
