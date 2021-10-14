@@ -9,7 +9,7 @@ export default gql`
     movies: [Movie]
   }
   type Movie {
-    _id: ID!
+    tmdbId: String!
     rating: Int 
     tags: [String]
   }
@@ -18,7 +18,7 @@ export default gql`
     user: User
   }
   type Query {
-    movies: [Movie]!
+    getUser(email:String!): User! 
   }
   type Mutation {
     addUser(
@@ -27,6 +27,6 @@ export default gql`
       password: String!
     ): Auth
     login(email: String!, password: String!): Auth
-    updateMovie(movieID: ID!, tags: [String], rating: Int): Movie
+    updateMovie(tmdbId: String): Movie
   }
 `;
