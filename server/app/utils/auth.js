@@ -1,11 +1,15 @@
-// import jwt from ('jsonwebtoken');
+import jwt from "jsonwebtoken";
+import config from "../config.js";
 
-// const secret = 'mysecretssshhhhhhh';
-// const expiration = '2h';
-
-// module.exports = {
-//   signToken: function ({ email, username, _id }) {
-//     const payload = { email, username, _id };
-//     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
-//   },
-// };
+export default {
+  generateToken(payload) {
+    return jwt.sign(payload, config.jwt.secret, {
+      expiresIn: config.jwt.expirationTime,
+    });
+  },
+  verifyToken(token) {
+    return jwt.verify(token, config.jwt.secret, {
+      maxAge: config.jwt.expirationTime,
+    });
+  },
+ };

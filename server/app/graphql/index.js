@@ -1,4 +1,3 @@
-export { default as resolvers } from "./resolvers";
-export { default as typeDefs } from "./schema";
+export { default as resolvers } from "./resolvers.js";
+export { default as typeDefs } from "./schema.js";
 
-module.exports = { typeDefs, resolvers };

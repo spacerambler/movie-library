@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-  input User {
+  type User {
     _id: ID
     name: String
     email: String!
@@ -9,15 +9,24 @@ export default gql`
     movies: [Movie]
   }
   type Movie {
-    _id: ID!
+    tmdbId: String!
     rating: Int 
     tags: [String]
   }
+  type Auth {
+    token: ID
+    user: User
+  }
   type Query {
-    movies: [Movie]!
+    getUser(email:String!): User! 
   }
   type Mutation {
-    createUser(newUser: User): User
-    updateMovie(movieID: ID!, tags: [String], rating: Int): Movie
+    addUser(
+      name: String!
+      email: String!
+      password: String!
+    ): Auth
+    login(email: String!, password: String!): Auth
+    updateMovie(tmdbId: String): Movie
   }
 `;
