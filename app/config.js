@@ -11,6 +11,6 @@ export default {
     expirationTime: process.env.JWT_EXPIRATION || "1d",
     secret: process.env.JWT_SECRET|| "mysecret",
   },
-  port: process.env.port || 4000,
+  port: process.env.PORT || 4000,
   saltRounds: 10,
 };
