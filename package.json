@@ -3,7 +3,7 @@
   "main": "app/index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --watch app",
+    "start": "nodemon -I --watch app",
     "seed": "node app/db/seed.js"
   },
   "devDependencies": {
